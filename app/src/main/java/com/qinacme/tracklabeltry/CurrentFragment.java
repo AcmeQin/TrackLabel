@@ -25,6 +25,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.MyLocationStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +109,13 @@ public class CurrentFragment extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMediaPlayer.start();
+                if (!mMediaPlayer.isPlaying())
+                    try {
+                        mMediaPlayer.prepare();
+                        mMediaPlayer.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
             }
         });
 
