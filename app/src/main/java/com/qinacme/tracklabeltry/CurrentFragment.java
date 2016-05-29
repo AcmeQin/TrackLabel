@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -32,6 +34,8 @@ import java.util.List;
 public class CurrentFragment extends Fragment {
     private Context mApp;
 
+    private MediaPlayer mMediaPlayer;
+
     private AMap aMap;
     private MapView mapView;
     private MyLocationSource mLocationSource;
@@ -44,6 +48,8 @@ public class CurrentFragment extends Fragment {
     private BluetoothAdapter mBluetoothAdapter;
     private List<MyBluetoothDev> bluetoothDevList = new ArrayList<MyBluetoothDev>();
     private Button bluetoothButton;
+    private Button playButton;
+    private Button pauseButton;
     private BroadcastReceiver myReciever = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -53,8 +59,13 @@ public class CurrentFragment extends Fragment {
                 MyBluetoothDev newDevice = new MyBluetoothDev(device.getName(),
                         device.getBluetoothClass().getMajorDeviceClass() ,
                         device.getBluetoothClass().getDeviceClass(), device.getAddress());
-                if (!bluetoothDevList.contains(newDevice))
+                if (!bluetoothDevList.contains(newDevice)){
                     bluetoothDevList.add(newDevice);
+                    bluetoothDevAdapter.notifyDataSetChanged();
+                }
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                int  rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+                Toast.makeText(mApp, name+"  RSSI: " + rssi + "dBm", Toast.LENGTH_SHORT).show();
             }
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
                 mBluetoothAdapter.startDiscovery();
@@ -93,6 +104,23 @@ public class CurrentFragment extends Fragment {
             }
         });
 
+        playButton = (Button) rootView.findViewById(R.id.play_button);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMediaPlayer.start();
+            }
+        });
+
+        pauseButton = (Button) rootView.findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMediaPlayer.stop();
+            }
+        });
+
+
         bluetoothDevRecycleView = (RecyclerView) rootView.findViewById(R.id.bluetooth_recycle_view);
         bluetoothDevAdapter = new MyAdapter(mApp,bluetoothDevList);
         bluetoothDevRecycleView.setAdapter(bluetoothDevAdapter);
@@ -101,14 +129,18 @@ public class CurrentFragment extends Fragment {
         bluetoothDevRecycleView.setLayoutManager(bluetoothDevLayoutManager);
 
 //        for test
-        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
-        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
-        bluetoothDevList.add(new MyBluetoothDev("myTablet", 4,0, "mac"));
-        bluetoothDevList.add(new MyBluetoothDev("myPhone",1,0,"mac"));
-        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
-        bluetoothDevList.add(new MyBluetoothDev("myTablet",4,0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("myTablet", 4,0, "mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("myPhone",1,0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("myTablet",4,0,"mac"));
 
         return rootView;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer){
+        mMediaPlayer = mediaPlayer;
     }
 
     private void setUpMap() {

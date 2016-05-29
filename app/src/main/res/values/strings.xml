@@ -8,4 +8,6 @@
     <string name="map_card_title">位置</string>
     <string name="bluetooth_button">匹配蓝牙</string>
     <string name="location_button">定位</string>
+    <string name="play_button">播放音乐</string>
+    <string name="pause_button">暂停音乐</string>
 </resources>
