@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">TrackLabelTry</string>
     <string name="action_settings">Settings</string>
     <string name="currentFragementName">当前设备</string>
@@ -10,4 +10,26 @@
     <string name="location_button">定位</string>
     <string name="play_button">播放音乐</string>
     <string name="pause_button">暂停音乐</string>
+
+    <!--  BluetoothRing -->
+    <string name="send">Send</string>
+    <string name="not_connected">亲，你还没连接到一台设备上呐</string>
+    <string name="bt_not_enabled_leaving">亲，该设备无蓝牙功能，退出程序。</string>
+    <string name="title_connecting">connecting...</string>
+    <string name="title_connected_to">连接到 <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="title_not_connected">无连接</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">搜索设备中</string>
+    <string name="select_device">选择一台设备来连接</string>
+    <string name="none_paired">没有成功配对的设备</string>
+    <string name="none_found">没有找到设备</string>
+    <string name="title_paired_devices">成功配对的设备</string>
+    <string name="title_other_devices">其他可连接的设备</string>
+    <string name="button_scan">扫描设备</string>
+
+    <!-- Options Menu -->
+    <string name="secure_connect">连接到一台设备 - 安全模式</string>
+    <string name="insecure_connect">连接到一台设备 - 非安全模式</string>
+    <string name="discoverable">让别人可以通过蓝牙搜到我</string>
 </resources>
