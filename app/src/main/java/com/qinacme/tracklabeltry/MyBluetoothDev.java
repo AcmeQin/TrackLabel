@@ -15,25 +15,25 @@ public class MyBluetoothDev {
         return macID;
     }
 
-    private String macID;
+    protected String macID;
 
     public String getName() {
         return name;
     }
 
-    private String name;
+    protected String name;
 
     public int getDevClass() {
         return devClass;
     }
 
-    private int devClass;
+    protected int devClass;
 
     public int getDevMajorClass() {
         return devMajorClass;
     }
 
-    private int devMajorClass;
+    protected int devMajorClass;
 
     @Override
     public boolean equals(Object o) {

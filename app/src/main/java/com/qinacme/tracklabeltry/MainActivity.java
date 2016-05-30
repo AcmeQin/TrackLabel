@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+            // TODO: 2016/5/30 Remove settings 
         }
 
         return super.onOptionsItemSelected(item);

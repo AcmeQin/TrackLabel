@@ -59,7 +59,6 @@ public class CurrentFragment extends Fragment {
     private MapView mapView;
     private MyLocationSource mLocationSource;
 
-    private RecyclerView mRecyclerView;
     private RecyclerView bluetoothDevRecycleView;
     private RecyclerView.Adapter bluetoothDevAdapter;
     private RecyclerView.LayoutManager bluetoothDevLayoutManager;
@@ -140,26 +139,8 @@ public class CurrentFragment extends Fragment {
         });
 
         playButton = (Button) rootView.findViewById(R.id.play_button);
-//        playButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!mMediaPlayer.isPlaying())
-//                    try {
-//                        mMediaPlayer.prepare();
-//                        mMediaPlayer.start();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//            }
-//        });
 
         pauseButton = (Button) rootView.findViewById(R.id.pause_button);
-//        pauseButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mMediaPlayer.stop();
-//            }
-//        });
 
 
         bluetoothDevRecycleView = (RecyclerView) rootView.findViewById(R.id.bluetooth_recycle_view);
@@ -170,7 +151,8 @@ public class CurrentFragment extends Fragment {
         bluetoothDevRecycleView.setLayoutManager(bluetoothDevLayoutManager);
 
 //        for test
-//        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
+        mApp.sha
+        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("myTablet", 4,0, "mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("myPhone",1,0,"mac"));

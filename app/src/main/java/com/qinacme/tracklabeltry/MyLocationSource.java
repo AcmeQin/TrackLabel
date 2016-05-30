@@ -23,7 +23,7 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
     private float curAccuracy;
     private double curLatitude;
     private double curLongtitude;
-    private Date curLocationTime;
+    private Date curLocationDate;
 
     public MyLocationSource(Context myContext) {
 
@@ -54,6 +54,10 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
         }
     }
 
+    public Date getCurLocationDate(){
+        return curLocationDate;
+    }
+
     @Override
     public void deactivate() {
         myListener = null;
@@ -64,6 +68,7 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
         myLocationClient = null;
     }
 
+
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (myListener!= null&& aMapLocation!=null){
@@ -73,9 +78,7 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
                 curLatitude=aMapLocation.getLatitude();
                 curLongtitude=aMapLocation.getLongitude();
                 curAccuracy=aMapLocation.getAccuracy();
-                SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                curLocationTime=new Date(aMapLocation.getTime());
-                dateFormat.format(curLocationTime);
+                curLocationDate=new Date(aMapLocation.getTime());
 //                        aMapLocation.getAddress();
 //                        aMapLocation.getCountry();
 //                        aMapLocation.getProvince();

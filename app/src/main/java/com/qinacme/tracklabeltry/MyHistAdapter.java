@@ -2,6 +2,7 @@ package com.qinacme.tracklabeltry;
 
 import android.bluetooth.BluetoothClass;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,40 +11,48 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.MyLocationStyle;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by qinacme on 4/14/2016.
+ * Created by qinacme on 2016/5/30.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    protected List<MyBluetoothDev> bluetoothDevList;
-    protected Context mContext;
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public View myBluetoothDevView;
-        public ViewHolder(View v){
-            super(v);
-            myBluetoothDevView =v;
-        }
+public class MyHistAdapter extends MyAdapter {
+
+    protected List<MyBluetoothHistDev> bluetoothHistList;
+
+    public MyHistAdapter(Context context, List<MyBluetoothHistDev> bluetoothHistList){
+        super(context,null);
+        this.bluetoothHistList = bluetoothHistList;
     }
-    public MyAdapter(Context context, List<MyBluetoothDev> bluetoothDevList){
-        this.mContext=context;
-        this.bluetoothDevList=bluetoothDevList;
-    }
+
+
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.bluetooth_dev_items, parent, false);
+                .inflate(R.layout.bluetooth_hist_items, parent, false);
         TextView devName = (TextView)v.findViewById(R.id.bluetooth_dev_name);
         devName.setText("Default Devices");
         ViewHolder vh =new ViewHolder(v);
         return vh;
     }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
-        MyBluetoothDev myBluetoothDev = bluetoothDevList.get(position);
+        MyBluetoothHistDev myBluetoothDev = bluetoothHistList.get(position);
         TextView devName = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_name);
         ImageView devIcon = (ImageView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_icon);
         devName.setText(myBluetoothDev.getName());
+        TextView devDate = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_name);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        String theDate = df.format(myBluetoothDev.getDate());
+        devDate.setText(theDate);
         Drawable d ;
         switch (myBluetoothDev.getDevClass()){
             case BluetoothClass.Device.TOY_VEHICLE: d=mContext.getResources().getDrawable(R.drawable.default_icon);
@@ -60,15 +69,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 break;
             case BluetoothClass.Device.AUDIO_VIDEO_VIDEO_CAMERA: d=mContext.getResources().getDrawable(R.drawable.camera);
                 break;
-            default:
-                d = mContext.getResources().getDrawable(R.drawable.default_icon);
+            default: d=mContext.getResources().getDrawable(R.drawable.default_icon);
                 break;
         }
+
         devIcon.setImageDrawable(d);
     }
-    @Override
-    public int getItemCount(){
 
-        return (null!=bluetoothDevList?bluetoothDevList.size():0);
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
     }
+
 }

@@ -8,6 +8,7 @@
     android:layout_margin="@dimen/cardview_margin"
     card_view:cardCornerRadius="4dp">
     <RelativeLayout
+        android:id="@+id/bluetooth_dev_info"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:paddingLeft="@dimen/activity_horizontal_margin">
@@ -22,6 +23,13 @@
             android:id="@+id/bluetooth_dev_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/bluetooth_dev_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bluetooth_date"/>
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>
 
