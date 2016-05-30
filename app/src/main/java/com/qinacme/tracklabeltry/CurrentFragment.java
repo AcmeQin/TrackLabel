@@ -151,8 +151,7 @@ public class CurrentFragment extends Fragment {
         bluetoothDevRecycleView.setLayoutManager(bluetoothDevLayoutManager);
 
 //        for test
-        mApp.sha
-        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
+//        bluetoothDevList.add(new MyBluetoothDev("myPhone", 1, 0,"mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("default_icon",0,0,"mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("myTablet", 4,0, "mac"));
 //        bluetoothDevList.add(new MyBluetoothDev("myPhone",1,0,"mac"));

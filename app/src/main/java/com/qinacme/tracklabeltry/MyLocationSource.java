@@ -9,6 +9,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.LocationSource;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -24,6 +25,7 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
     private double curLatitude;
     private double curLongtitude;
     private Date curLocationDate;
+    Calendar myCalendar;
 
     public MyLocationSource(Context myContext) {
 
@@ -33,6 +35,7 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
 
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
+        myCalendar = Calendar.getInstance();
         myListener = onLocationChangedListener;
         if (myLocationClient==null){
             myLocationClient = new AMapLocationClient(myContext);
@@ -55,7 +58,16 @@ public class MyLocationSource implements LocationSource, AMapLocationListener {
     }
 
     public Date getCurLocationDate(){
+        curLocationDate = myCalendar.getTime();
         return curLocationDate;
+    }
+
+    public double getCurLatitude(){
+        return curLatitude;
+    }
+
+    public double getCurLongtitude(){
+        return curLongtitude;
     }
 
     @Override

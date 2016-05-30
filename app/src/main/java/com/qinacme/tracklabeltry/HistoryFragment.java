@@ -51,13 +51,17 @@ public class HistoryFragment extends Fragment {
         }
         aMap.setMapType(AMap.MAP_TYPE_NORMAL);
 
-        bluetoothHistRecycleView = (RecyclerView) rootView.findViewById(R.id.bluetooth_recycle_view);
+        bluetoothHistRecycleView = (RecyclerView) rootView.findViewById(R.id.bluetooth_history_recycle_view);
         bluetoothHistAdapter = new MyHistAdapter(mApp,bluetoothHistList);
         bluetoothHistRecycleView.setAdapter(bluetoothHistAdapter);
         bluetoothHistRecycleView.setHasFixedSize(true);
         bluetoothHistLayoutManager = new LinearLayoutManager(mApp);
         bluetoothHistRecycleView.setLayoutManager(bluetoothHistLayoutManager);
 
+        bluetoothHistList.add(new MyBluetoothHistDev(new MyBluetoothDev("myPhone", 1, 0, "mac"),
+                mLocationSource.getCurLocationDate(), mLocationSource.getCurLatitude(),
+                mLocationSource.getCurLongtitude()));
+        bluetoothHistAdapter.notifyDataSetChanged();
         return rootView;
     }
 
@@ -73,6 +77,31 @@ public class HistoryFragment extends Fragment {
         aMap.setLocationSource(mLocationSource);
         aMap.getUiSettings().setMyLocationButtonEnabled(true);
         aMap.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        mapView.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroy() {
+        mapView.onDestroy();
+        mLocationSource.deactivate();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
 }
