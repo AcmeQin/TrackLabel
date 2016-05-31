@@ -55,8 +55,8 @@ public class CurrentFragment extends Fragment {
 
     private MediaPlayer mMediaPlayer;
 
-    private AMap aMap;
-    private MapView mapView;
+//    private AMap aMap;
+//    private MapView mapView;
     private MyLocationSource mLocationSource;
 
     private RecyclerView bluetoothDevRecycleView;
@@ -74,15 +74,15 @@ public class CurrentFragment extends Fragment {
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)){
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                int  rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
                 MyBluetoothDev newDevice = new MyBluetoothDev(device.getName(),
                         device.getBluetoothClass().getMajorDeviceClass() ,
-                        device.getBluetoothClass().getDeviceClass(), device.getAddress());
+                        device.getBluetoothClass().getDeviceClass(), device.getAddress(),rssi);
                 if (!bluetoothDevList.contains(newDevice)){
                     bluetoothDevList.add(newDevice);
                     bluetoothDevAdapter.notifyDataSetChanged();
                 }
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-                int  rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
                 Toast.makeText(mApp, name+"  RSSI: " + rssi + "dBm", Toast.LENGTH_SHORT).show();
             }
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
@@ -112,14 +112,14 @@ public class CurrentFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_current,container,false);
         mApp = getActivity();
         setHasOptionsMenu(true);
-        mapView = (MapView) rootView.findViewById(R.id.map_view);
-        mapView.onCreate(savedInstanceState);
+//        mapView = (MapView) rootView.findViewById(R.id.map_view);
+//        mapView.onCreate(savedInstanceState);
         mLocationSource = new MyLocationSource(mApp);
-        if (aMap == null) {
-            aMap = mapView.getMap();
-            setUpMap();
-        }
-        aMap.setMapType(AMap.MAP_TYPE_NORMAL);
+//        if (aMap == null) {
+//            aMap = mapView.getMap();
+//            setUpMap();
+//        }
+//        aMap.setMapType(AMap.MAP_TYPE_NORMAL);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -165,28 +165,28 @@ public class CurrentFragment extends Fragment {
         mMediaPlayer = mediaPlayer;
     }
 
-    private void setUpMap() {
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-//        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.point));
-        myLocationStyle.strokeColor(Color.BLACK);
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));
-        myLocationStyle.strokeWidth(1.0f);
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setLocationSource(mLocationSource);
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
-        aMap.setMyLocationEnabled(true);
-    }
+//    private void setUpMap() {
+//        MyLocationStyle myLocationStyle = new MyLocationStyle();
+////        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.point));
+//        myLocationStyle.strokeColor(Color.BLACK);
+//        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));
+//        myLocationStyle.strokeWidth(1.0f);
+//        aMap.setMyLocationStyle(myLocationStyle);
+//        aMap.setLocationSource(mLocationSource);
+//        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+//        aMap.setMyLocationEnabled(true);
+//    }
 
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+//        mapView.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+//        mapView.onResume();
         // Performing this check in onResume() covers the case in which BT was
         // not enabled during onStart(), so we were paused to enable it...
         // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
@@ -215,13 +215,13 @@ public class CurrentFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        mapView.onSaveInstanceState(outState);
+//        mapView.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDestroy() {
-        mapView.onDestroy();
+//        mapView.onDestroy();
         mLocationSource.deactivate();
         super.onDestroy();
     }

@@ -48,12 +48,12 @@ public class MyHistAdapter extends RecyclerView.Adapter<MyHistAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position){
         MyBluetoothHistDev myBluetoothDev = bluetoothHistList.get(position);
         TextView devName = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_name);
-        ImageView devIcon = (ImageView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_icon);
         devName.setText(myBluetoothDev.getName());
         TextView devDate = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_name);
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String theDate = df.format(myBluetoothDev.getDate());
         devDate.setText(theDate);
+        ImageView devIcon = (ImageView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_icon);
         Drawable d ;
         switch (myBluetoothDev.getDevClass()){
             case BluetoothClass.Device.TOY_VEHICLE: d=mContext.getResources().getDrawable(R.drawable.default_icon);

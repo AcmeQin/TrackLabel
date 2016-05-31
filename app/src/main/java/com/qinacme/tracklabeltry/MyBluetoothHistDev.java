@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class MyBluetoothHistDev extends MyBluetoothDev{
     public MyBluetoothHistDev(MyBluetoothDev mbd,Date date, double curLatitude, double curLongtitude) {
-        super(mbd.name,mbd.devMajorClass,mbd.devClass,mbd.macID);
+        super(mbd.getName(),mbd.getDevMajorClass(),mbd.getDevClass(),mbd.getMacID(),mbd.getRssi());
         this.date = date;
         this.curLatitude = curLatitude;
         this.curLongtitude = curLongtitude;

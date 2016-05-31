@@ -58,7 +58,7 @@ public class HistoryFragment extends Fragment {
         bluetoothHistLayoutManager = new LinearLayoutManager(mApp);
         bluetoothHistRecycleView.setLayoutManager(bluetoothHistLayoutManager);
 
-        bluetoothHistList.add(new MyBluetoothHistDev(new MyBluetoothDev("myPhone", 1, 0, "mac"),
+        bluetoothHistList.add(new MyBluetoothHistDev(new MyBluetoothDev("myPhone123", 1, 0, "mac",-87),
                 mLocationSource.getCurLocationDate(), mLocationSource.getCurLatitude(),
                 mLocationSource.getCurLongtitude()));
         bluetoothHistAdapter.notifyDataSetChanged();

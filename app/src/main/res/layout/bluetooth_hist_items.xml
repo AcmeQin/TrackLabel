@@ -22,13 +22,15 @@
             android:layout_toRightOf="@+id/bluetooth_dev_icon"
             android:id="@+id/bluetooth_dev_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"/>
         <TextView
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/bluetooth_dev_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bluetooth_date"/>
+            android:id="@+id/bluetooth_date"
+            android:paddingLeft="8dp"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

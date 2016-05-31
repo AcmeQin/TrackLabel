@@ -6,7 +6,7 @@
     <string name="normal">NORMAL_MAP</string>
     <string name="amapAPIKey">c2b9e2919bf1672c2cd72e43a3600198</string>
     <string name="map_card_title">位置</string>
-    <string name="bluetooth_button">匹配蓝牙</string>
+    <string name="bluetooth_button">扫描设备</string>
     <string name="location_button">定位</string>
     <string name="play_button">播放音乐</string>
     <string name="pause_button">暂停音乐</string>

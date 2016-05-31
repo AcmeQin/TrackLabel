@@ -42,8 +42,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         MyBluetoothDev myBluetoothDev = bluetoothDevList.get(position);
         TextView devName = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_name);
-        ImageView devIcon = (ImageView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_icon);
         devName.setText(myBluetoothDev.getName());
+        TextView devRssi = (TextView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_rssi);
+        devRssi.setText(myBluetoothDev.getRssi() + "dBm");
+        ImageView devIcon = (ImageView)holder.myBluetoothDevView.findViewById(R.id.bluetooth_dev_icon);
         Drawable d ;
         switch (myBluetoothDev.getDevClass()){
             case BluetoothClass.Device.TOY_VEHICLE: d=mContext.getResources().getDrawable(R.drawable.default_icon);
