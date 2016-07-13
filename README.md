@@ -1,5 +1,5 @@
 # TrackLabel #
-Android App of Blueteeth based lost devices location.
+Android App of Blueteeth based lost devices locating.
 
 ##Description##  
 This is repo for Computer Network Final project.
